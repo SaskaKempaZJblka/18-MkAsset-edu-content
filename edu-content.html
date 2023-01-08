@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>listingWithCode</title>
+  <link rel="stylesheet" type="text/css" href="https://edu.gplweb.pl/gui/default/gtkDecorator-2.7.14.css" />
+  <link rel="stylesheet" href="prism.css" />
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.19.3.css">
+  <style>
+	html, body {
+		margin: 0px;
+		height: 100%;
+	}
+	#workshop { width: 100%; }
+	#workshop header {
+		background-color: #e5e8e7;
+		border-bottom: double 3px #c3c6c5;
+		padding: 1rem .75rem;
+	}
+	#workshop header h1 {  margin: 0px; }
+	#workshop header p { font-style: italic; }
+	#workshop section h2 {
+		background-color: #e5e8e7;
+		margin: 0;
+		padding: 1rem;
+		padding-bottom: 0rem;
+	}
+	#workshop section ol {
+		background-image: linear-gradient(180deg, #e5e8e7, #fff);
+		margin: 0px;
+		padding: 1rem 2rem 1rem 3rem;
+	}
+	#workshop footer {
+		background-image: linear-gradient(180deg, #fff, #e5e8e7);
+		margin: 0px;
+		padding: 1rem 2rem;
+	}
+	#workshop li {
+		margin: 0.6rem 0;
+		line-height: 1.5rem;
+	}
+	#wMain {  background-color: #fff; padding: 2rem 0; }
+	code {
+		background: #e5e8e7;
+		border: solid 2px #c3c6c5;
+		padding: 0.2rem 0.4rem;
+	}
+	.step {
+		position: relative;
+		background-color: yellow;
+		margin: 2rem;
+		padding: 2rem;
+		outline: dashed 4px black;
+	}
+	.step p {
+		background-color: #e3dcff;
+		display: inline-block;
+		margin: 0px;
+		padding: 0px;
+	}
+	.step span {
+		background-color: #cff0fb;
+		border: dashed 1px lightblue;
+	}
+	.stp1, .stp2, .stp3, .stp4 {
+		height: auto;
+		width: auto;
+	}
+	.stp1 span {  color: lightblue; }
+	.stp1::before, .stp2::before, .stp3::before, .stp4::before {
+		position: absolute;
+		display: block;
+	}
+	.stp1:before { content: 'height, width'; }
+	.stp2:before { content: 'padding'; top: 2rem; left: 2rem; }
+	.stp3:before { content: 'border'; top: 2rem; left: 2rem; background-color: #737373; color: #fff; }
+	.stp4:before { content: 'margin'; top: 2rem; left: 2rem; }
+	.stp2, .stp3, .stp4 {	padding: 1rem 1.5rem !important; }
+	.stp3, .stp4 {	border: solid 6px #737373; }
+	.stp4 { margin: 1.5rem !important; }
+	.codeBlock {
+	border: solid 1px #b8b9b5;
+	border-radius: 1rem;
+	margin: 0;
+	padding: 1rem;
+}
+.codeBlock {
+	background-color: #fff;
+	margin: 1rem .5rem;
+}
+.codeBlock.whGr {	background-color: #fff; }
+.codeBlock.grWh {	background-color: #d8d8d6; }
+.codeBlock > figcaption {
+	border-bottom: solid 2px #808080;/*c3c6c5;*/
+	color: #404040;
+	display: block;
+	margin: -0.5rem 0 .5rem 0;
+	font-style: italic;
+}
+.codeBlock > figcaption a {
+	border: solid 2px #808080; /*c3c6c5;*/
+	background-color: #fff;
+	color: #808080;
+	display: inline-block;
+	font-weight: 800;
+	margin-bottom: -2px;
+	text-align: center;
+	width: 3rem;
+	/*padding: 0 .5rem;*/
+}
+.codeBlock.ltr div, .codeBlock.rtl div {
+	display: inline-block;
+	vertical-align: top;
+}
+.codeBlock.ltr, .codeBlock.rtl {
+	display: block;
+	margin: 1rem 0;
+/*	width: 100%;*/
+}
+.codeBlock pre, .codeBlock code {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+.codeBlock code {
+	background-color: #FDF6E3;
+	color: #404040;
+	font-family: FreeMono, "Curier New";
+	font-size: 1rem;
+	font-weight: 600;
+	padding: 0.5rem;
+}
+.codeBlock p > code {
+	display: inline-block;
+	padding: .1rem .5rem;
+	text-indent: initial;
+}
+.codeBlock div { background-color: #c3c6c5; }
+/*.codeBlock > div:first-of-type,
+.codeBlock > div:last-of-type {
+	overflow: auto;
+	outline: solid 1px #404040;
+	width: 48%;
+}*/
+.codeBlock .arrow {
+	background-color: inherit;
+	color: #000;
+	cursor: initial;
+	font-size: 2rem;
+	line-height: 1.6rem;
+	text-align: center;
+	width: 2%;
+}
+.codeBlock.rtl .arrow::after, .codeBlock.ltr .arrow::after {
+	text-align: center;
+	display: block;
+	width: 100%;
+}
+.codeBlock.ltr .arrow::after { content: "▸"; }
+.codeBlock.rtl .arrow::after { content: "◂"; }
+  </style>
+</head>
+<body>
+<section id="workshop" data-document="workshop|exercises|task" data-docname="edu-content" data-version="1.0.0">
+  <header>
+	<h1>TITLE</h1>
+	<p>Subtitle</p>
+  </header>
+  
+  <section>
+	<h2>Przygotowanie</h2>
+	<ol>
+	  <li>Step <code>1</code></li>
+	  <li>Step <code>2</code></li>
+	  <li>Step <code>3</code></li>
+	</ol>
+  </section>
+  <section id="wMain">
+	<figure class="codeBlock grWh">
+	  <figcaption><a id="cap-1">1</a> Title-1</figcaption>
+	    <h3>Text Header lvl3</h3>
+		<p>Description</p>
+		<ul>
+		  <li>listItem</li>
+		</ul>
+		<h2>Text Header lvl2</h2>
+		<ol>
+		  <li>listItem</li>
+		</ol>
+
+	</figure>
+	<figure class="codeBlock grWh">
+	  <figcaption><a id="cap-2">2</a> Title-2</figcaption>
+		<div style="background-color: unset;">
+		  <figure class="gtkImage">
+			<img src="https://edu.gplweb.pl/gui/eduAssets/assetArchiveRes.svg" alt="Icon: Archiwum">
+		  </figure>
+		  <p class="dspInb">Przykładowy szablon do pobrania z listy plików z panelu Zasobów lekcji.</p>
+		</div>
+		<img src="https://edu.gplweb.pl/gui/cBanners/TiDA-banner.png" alt="Baner TiDA">
+	</figure>
+	<figure class="codeBlock grWh">
+	  <figcaption><a id="cap-3">3</a> Title-3</figcaption>
+		<p>Column View</p>
+	<SECTION class="gtkPaned horizontal innSpace">
+	  <DIV class="gtkPane1">
+		<p>Pane 1</p>
+		<table border="1">
+		  <tr><th>A</th><th>B</th><th>C</th></tr>
+		  <tr><td>1</td><td>4</td><td>9</td></tr>
+		  <tr><td>2</td><td>5</td><td>8</td></tr>
+		  <tr><td>3</td><td>6</td><td>7</td></tr>
+		</table>
+  </DIV>
+  <DIV class="gtkPaneGrab"></DIV>
+  <DIV class="gtkPane2">
+	Pane 2: gtkPaned horizontal<br/>
+	Pane 2: gtkPaned vertical
+  </DIV>
+</SECTION>
+	</figure>
+	<figure class="codeBlock grWh">
+	  <figcaption><a id="cap-4">4</a> Title-4</figcaption>
+	  
+		<p>Description</p>
+		<pre><code class="language-css">p{
+			color: black;
+		}
+		</code></pre><br>
+		
+		<p><b>!!!<span style="color:red;">Uwaga</span>!!!</b> Keep calm and install Linux</p>
+		<button class="gtkButton deleteBlock"onclick="parentDelete(this)">Usun blok</button>
+	</figure>
+  </section>
+  <section>
+  <div id="createBlockForm">
+  <label for="blockTitle">Tytuł</label>
+  <input type="text" id="blockTitle" placeholder="Tytuł">
+  <label for="blockDesc">Opis</label>
+  <input type="text" id="blockDesc" placeholder="Opis">
+  <label for="blockNumber">Numer</label>
+  <input type="number" id="blockNumber" placeholder="Numer">
+  <label for="codeLanguageSelect">Wybierz jezyk programowania</label>
+  <select name="codeLanguageSelect" id="codeLanguageSelect">
+	<option value="" selected disabled hidden>Wybierz jezyk programowania</option>
+	<option value="javascript">JavaScript</option>
+	<option value="html">HTML</option>
+	<option value="css">CSS</option>
+	<option value="python">Python</option>
+	<option value="cpp">C++</option>
+	<option value="java">Java</option>
+</select>
+  <label for="codeContent">Wpisz kod</label>
+  <textarea id="codeContent" placeholder="Tutaj wpisz kod"></textarea><br>
+  <button class="gtkButton createBlock" onclick="creatingContent()" >Dodaj kolejny blok</button>
+  <!--divy potrzebne dla qunit, w razie testu odkomentować-->
+
+  <!--<div id="qunit"></div>
+  <div id="qunit-fixture"></div>-->
+  <!--divy potrzebne dla qunit, w razie testu odkomentować-->
+
+
+</div>
+</section>
+  <footer>
+	<h2>Podsumowanie</h2>
+	<ol>
+	  <li>None or Empty</li>
+	  <li>None or Empty with <code>code</code></li>
+	  <li>None or Empty</li>
+	</ol>
+  </footer>
+</article>
+
+
+<script src="https://code.jquery.com/qunit/qunit-2.19.3.js"></script>
+<script src="prism.js"></script>
+<script src="listingWithCode.js"></script>
+<!--<script type="module" src="listingWithCodeTest.js"></script>
+<script type="module" src="tests.js"></script>-->
+
+
+</body>
+</html>
